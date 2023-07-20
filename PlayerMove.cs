@@ -51,5 +51,14 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "OxygenArea")
+        {
+            Debug.Log("test");
+        }
+
+    }
+
     
 }
