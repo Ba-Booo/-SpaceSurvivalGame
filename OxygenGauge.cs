@@ -33,15 +33,5 @@ public class OxygenGauge : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "OxygenArea")
-        {
-            CurOxygen += 5 * Time.deltaTime;
-            Debug.Log("ttlqkf");
-        }
-
-    }
-
 
 }
