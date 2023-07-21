@@ -23,15 +23,17 @@ public class OxygenGauge : MonoBehaviour
     {
         Oxygen.value = CurOxygen / MaxOxygen;
 
-        if( CurOxygen >= 0 )        //0미만으로 안 떨어지게 하는 용도
-        {
-            CurOxygen -= 1 * Time.deltaTime;
-        }
-        else
+        if( CurOxygen <= 0 )        //0 이상 MaxOxygen 이하
         {
             CurOxygen = 0;
         }
+        else if( CurOxygen > MaxOxygen)
+        {
+            CurOxygen = MaxOxygen;
+        }
+        else
+        {
+            CurOxygen -= 1 * Time.deltaTime;
+        }
     }
-
-
 }
