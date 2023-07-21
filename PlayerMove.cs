@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
 
     Rigidbody rb;
+    OxygenGauge og;
 
     float MoveX;
     float MoveZ;
@@ -18,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody>();
+        og = GameObject.Find("OxygenSlider").GetComponent<OxygenGauge>();
         
     }
 
@@ -51,14 +53,13 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)        //산소구역 충돌판정
     {
         if (other.gameObject.name == "OxygenArea")
         {
-            Debug.Log("test");
+            og.CurOxygen += 20 * Time.deltaTime;
         }
 
     }
 
-    
 }
