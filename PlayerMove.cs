@@ -8,8 +8,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rb;
     OxygenGauge og;
 
-    float MoveX;
-    float MoveZ;
+    float MoveX, MoveZ;
 
     public float Speed;
     public float JumpPower;
@@ -53,13 +52,14 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    void OnTriggerStay(Collider other)        //산소구역 충돌판정
+    void OnTriggerStay(Collider other)      //산소구역 충돌
     {
         if (other.gameObject.name == "OxygenArea")
         {
-            og.CurOxygen += 20 * Time.deltaTime;
+            og.NowOxygen += 18 * Time.deltaTime;
         }
 
     }
 
+    
 }
