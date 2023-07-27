@@ -8,7 +8,7 @@ public class OxygenGauge : MonoBehaviour
 
     Slider Oxygen;
 
-    public float CurOxygen;
+    public float NowOxygen;
     public float MaxOxygen;
 
 
@@ -21,19 +21,19 @@ public class OxygenGauge : MonoBehaviour
 
     void Update()
     {
-        Oxygen.value = CurOxygen / MaxOxygen;
+        Oxygen.value = NowOxygen / MaxOxygen;
 
-        if( CurOxygen <= 0 )        //0 이상 MaxOxygen 이하
+        if( NowOxygen <= 0 )        //0 이상 MaxOxygen 이하
         {
-            CurOxygen = 0;
+            NowOxygen = 0;
         }
-        else if( CurOxygen > MaxOxygen)
+        else if( NowOxygen > MaxOxygen)
         {
-            CurOxygen = MaxOxygen;
+            NowOxygen = MaxOxygen;
         }
         else
         {
-            CurOxygen -= 1 * Time.deltaTime;
+            NowOxygen -= 1 * Time.deltaTime;
         }
     }
 }
