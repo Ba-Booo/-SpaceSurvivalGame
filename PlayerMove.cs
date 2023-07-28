@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
 
-    Rigidbody rb;
-    OxygenGauge og;
+    Rigidbody rb;       //중력
+    Slider os;      //산소
 
     float MoveX, MoveZ;
 
     public float Speed;
     public float JumpPower;
+    public float NowOxygen;
+    public float MaxOxygen;
 
 
     void Start()
     {
 
         rb = GetComponent<Rigidbody>();
-        og = GameObject.Find("OxygenSlider").GetComponent<OxygenGauge>();
+        os = GameObject.Find("OxygenSlider").GetComponent<Slider>();
         
     }
 
@@ -27,6 +30,7 @@ public class PlayerMove : MonoBehaviour
     {   
         Move();
         Jump();
+        OxygenGauge();
     }
 
 
@@ -52,14 +56,33 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    void OnTriggerStay(Collider other)      //산소구역 충돌
+    void OxygenGauge()
     {
-        if (other.gameObject.name == "OxygenArea")
+
+        os.value = NowOxygen / MaxOxygen;       //산소게이지
+        
+        if( NowOxygen <= 0 )        //0 이상 MaxOxygen 이하
         {
-            og.NowOxygen += 18 * Time.deltaTime;
+            NowOxygen = 0;
+        }
+        else if( NowOxygen > MaxOxygen)
+        {
+            NowOxygen = MaxOxygen;
+        }
+        else
+        {
+            NowOxygen -= 1 * Time.deltaTime;
         }
 
     }
 
-    
+    void OnTriggerStay(Collider other)      //산소구역 충돌
+    {
+        if (other.gameObject.name == "OxygenArea")
+        {
+            NowOxygen += 18 * Time.deltaTime;
+        }
+
+    }
+     
 }
