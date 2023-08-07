@@ -8,6 +8,8 @@ public class PlayerMove : MonoBehaviour
 
     Rigidbody rb;       //중력
     Slider os;      //산소
+    
+    public Transform AroundChunk;
 
     float MoveX, MoveZ;
 
@@ -31,6 +33,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         OxygenGauge();
+        Chunk();
     }
 
 
@@ -44,7 +47,6 @@ public class PlayerMove : MonoBehaviour
         transform.position = new Vector3(transform.position.x + MoveX, transform.position.y, transform.position.z + MoveZ );
 
     }
-
 
     void Jump()
     {
@@ -76,9 +78,14 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    void Chunk()
+    {
+        AroundChunk.position = new Vector3(transform.position.x, 0, transform.position.z);
+    }
+
     void OnTriggerStay(Collider other)      //산소구역 충돌
     {
-        if (other.gameObject.name == "OxygenArea")
+        if (other.gameObject.name == "OxygenZone")
         {
             NowOxygen += 18 * Time.deltaTime;
         }
