@@ -9,24 +9,24 @@ public class MapCreation : MonoBehaviour
 
     float[ , ] terrainHeightData;
 
-    public int rowsAndColumns;
+    public int size;
 
-    public float refinement;
-    public float maxHeight;
+    public float refinement;    //주파수
+    public float maxHeight;     //최대높이
 
     void Start()
     {
         terrain = GetComponent<Terrain>();
 
-        terrainHeightData = new float[rowsAndColumns, rowsAndColumns];
+        terrainHeightData = new float[size, size];
 
-        for(int x = 0; x < rowsAndColumns; x++)
+        for(int x = 0; x < size; x++)
         {
 
-            for(int y = 0; y < rowsAndColumns; y++)
+            for(int y = 0; y < size; y++)
             { 
 
-                terrainHeightData[x,y] = Mathf.PerlinNoise(x * refinement, y * refinement) * maxHeight;
+                terrainHeightData[y, x] = Mathf.PerlinNoise( (y + transform.position.z) * refinement, (x + transform.position.x) * refinement ) * maxHeight;
 
             }
 
