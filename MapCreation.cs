@@ -6,16 +6,28 @@ public class MapCreation : MonoBehaviour
 {
 
     Terrain terrain;
+    
+    public Transform Target;
 
     float[ , ] terrainHeightData;
 
     public int size;
+    public int aroundChunk;
 
     public float refinement;    //주파수
     public float maxHeight;     //최대높이
 
-    void Start()
+    void Update()
     {
+
+        MapShape();
+        MapPosition();
+
+    }
+
+    void MapShape()
+    {
+
         terrain = GetComponent<Terrain>();
 
         terrainHeightData = new float[size, size];
@@ -34,6 +46,14 @@ public class MapCreation : MonoBehaviour
 
         terrain.terrainData.SetHeights(0, 0, terrainHeightData);
 
+    }
+
+    void MapPosition()
+    {
+        if( transform.position.x + aroundChunk <= Target.position.x )
+        {
+            transform.position = new Vector3(transform.position.x + 128 ,0 ,transform.position.z);
+        }
     }
 
 }
