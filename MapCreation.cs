@@ -20,14 +20,34 @@ public class MapCreation : MonoBehaviour
     void Update()
     {
 
-        MapShape();
-        MapPosition();
+        //청크 위치
+        if( transform.position.x + aroundChunk + size <= Target.position.x )        //x좌표
+        {
+            transform.position = new Vector3(transform.position.x + 257 ,0 ,transform.position.z);
+            MapShape();
+        }
+        else if( transform.position.x - aroundChunk >= Target.position.x )
+        {
+            transform.position = new Vector3(transform.position.x - 257 ,0 ,transform.position.z);
+            MapShape();
+        }
+
+        if( transform.position.z + aroundChunk + size <= Target.position.z )        //z좌표
+        {
+            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z + 257);
+            MapShape();
+        }
+        else if( transform.position.z - aroundChunk >= Target.position.z )
+        {
+            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z - 257);
+            MapShape();
+        }
 
     }
 
     void MapShape()
     {
-
+        
         terrain = GetComponent<Terrain>();
 
         terrainHeightData = new float[size, size];
@@ -46,27 +66,6 @@ public class MapCreation : MonoBehaviour
 
         terrain.terrainData.SetHeights(0, 0, terrainHeightData);
 
-    }
-
-    void MapPosition()
-    {
-        if( transform.position.x + aroundChunk + size <= Target.position.x )        //x좌표
-        {
-            transform.position = new Vector3(transform.position.x + 258 ,0 ,transform.position.z);
-        }
-        else if( transform.position.x - aroundChunk >= Target.position.x )
-        {
-            transform.position = new Vector3(transform.position.x - 258 ,0 ,transform.position.z);
-        }
-
-        if( transform.position.z + aroundChunk + size <= Target.position.z )        //z좌표
-        {
-            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z + 258);
-        }
-        else if( transform.position.z - aroundChunk >= Target.position.z )
-        {
-            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z - 258);
-        }
     }
 
 }
