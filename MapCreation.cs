@@ -37,8 +37,8 @@ public class MapCreation : MonoBehaviour
 
             for(int y = 0; y < size; y++)
             { 
-
-                terrainHeightData[y, x] = Mathf.PerlinNoise( (y + transform.position.z) * refinement, (x + transform.position.x) * refinement ) * maxHeight;
+                //1000은 대칭방지용
+                terrainHeightData[y, x] = Mathf.PerlinNoise( (y + transform.position.z + 1000) * refinement, (x + transform.position.x + 1000) * refinement ) * maxHeight;
 
             }
 
@@ -50,9 +50,22 @@ public class MapCreation : MonoBehaviour
 
     void MapPosition()
     {
-        if( transform.position.x + aroundChunk <= Target.position.x )
+        if( transform.position.x + aroundChunk + size <= Target.position.x )        //x좌표
         {
-            transform.position = new Vector3(transform.position.x + 128 ,0 ,transform.position.z);
+            transform.position = new Vector3(transform.position.x + 258 ,0 ,transform.position.z);
+        }
+        else if( transform.position.x - aroundChunk >= Target.position.x )
+        {
+            transform.position = new Vector3(transform.position.x - 258 ,0 ,transform.position.z);
+        }
+
+        if( transform.position.z + aroundChunk + size <= Target.position.z )        //z좌표
+        {
+            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z + 258);
+        }
+        else if( transform.position.z - aroundChunk >= Target.position.z )
+        {
+            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z - 258);
         }
     }
 
