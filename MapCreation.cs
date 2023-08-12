@@ -17,6 +17,12 @@ public class MapCreation : MonoBehaviour
     public float refinement;    //주파수
     public float maxHeight;     //최대높이
 
+    void Start()
+    {
+        //초기화
+        MapShape();
+    }
+
     void Update()
     {
 
