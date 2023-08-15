@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
 
     public GameObject MenuSet;
 
+    bool blink;
+
     void Start()
     {
         
@@ -15,13 +17,15 @@ public class Inventory : MonoBehaviour
     void Update()
     {
 
-        if( Input.GetKey(KeyCode.E) )
+        if( Input.GetKeyDown(KeyCode.E) && blink == true)
         {
             MenuSet.SetActive(false);
+            blink = false;
         }
-        else
+        else if( Input.GetKeyDown(KeyCode.E) && blink == false)
         {
             MenuSet.SetActive(true);
+            blink = true;
         }
 
     }
