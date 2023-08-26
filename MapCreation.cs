@@ -11,11 +11,16 @@ public class MapCreation : MonoBehaviour
 
     float[ , ] terrainHeightData;
 
-    public int size;
+    //오브젝트풀링
     public int aroundChunk;
 
+    //펄린노이즈
+    public int octave;
+    public int size;
     public float refinement;    //주파수
-    public float maxHeight;     //최대높이
+    public float height;     //최대높이
+    float octaveRefinement;
+    float octaveHeight;
 
     void Start()
     {
@@ -57,14 +62,22 @@ public class MapCreation : MonoBehaviour
         terrain = GetComponent<Terrain>();
 
         terrainHeightData = new float[size, size];
-
-        for(int x = 0; x < size; x++)
+        
+        for(int o = 1; o <= octave; o++)
         {
+            
+            octaveHeight = height * (o / octave);
+            octaveRefinement = refinement * o;
 
-            for(int y = 0; y < size; y++)
-            { 
-                //1000은 대칭방지용
-                terrainHeightData[y, x] = Mathf.PerlinNoise( (y + transform.position.z + 1000) * refinement, (x + transform.position.x + 1000) * refinement ) * maxHeight;
+            for(int x = 0; x < size; x++)
+            {
+
+                for(int y = 0; y < size; y++)
+                { 
+                    //1000은 대칭방지용
+                    terrainHeightData[y, x] = terrainHeightData[y, x] + (Mathf.PerlinNoise( (y + transform.position.z + 1000) * octaveRefinement, (x + transform.position.x + 1000) * octaveRefinement ) * octaveHeight);
+
+                }
 
             }
 
