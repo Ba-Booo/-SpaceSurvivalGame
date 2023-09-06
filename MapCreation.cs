@@ -9,8 +9,6 @@ public class MapCreation : MonoBehaviour
     
     public Transform Target;
 
-    float[ , ] terrainHeightData;
-
     //오브젝트풀링
     public int aroundChunk;
 
@@ -21,6 +19,7 @@ public class MapCreation : MonoBehaviour
     public float height;     //최대높이
     float octaveRefinement;
     float octaveHeight;
+    float[ , ] terrainHeightData;
 
     void Start()
     {
