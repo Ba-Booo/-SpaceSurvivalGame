@@ -24,8 +24,12 @@ public class MapCreation : MonoBehaviour
 
     void Start()
     {
+
+        terrain = GetComponent<Terrain>();
+        
         //초기화
         MapShape();
+        
     }
 
     void Update()
@@ -58,12 +62,10 @@ public class MapCreation : MonoBehaviour
 
     void MapShape()
     {
-        
-        terrain = GetComponent<Terrain>();
 
         terrainHeightData = new float[size, size];
         
-        for(int o = 1; o <= octave; o++)
+        for(float o = 1; o <= octave; o++)
         {
             
             octaveHeight = height * (o / octave);
