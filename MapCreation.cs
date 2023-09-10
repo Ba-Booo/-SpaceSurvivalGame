@@ -37,23 +37,23 @@ public class MapCreation : MonoBehaviour
         //청크 위치
         if( transform.position.x + aroundChunk + size <= Target.position.x )        //x좌표
         {
-            transform.position = new Vector3(transform.position.x + 257 ,0 ,transform.position.z);
+            transform.position = new Vector3(transform.position.x + 256 ,0 ,transform.position.z);
             MapShape();
         }
         else if( transform.position.x - aroundChunk >= Target.position.x )
         {
-            transform.position = new Vector3(transform.position.x - 257 ,0 ,transform.position.z);
+            transform.position = new Vector3(transform.position.x - 256 ,0 ,transform.position.z);
             MapShape();
         }
 
         if( transform.position.z + aroundChunk + size <= Target.position.z )        //z좌표
         {
-            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z + 257);
+            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z + 256);
             MapShape();
         }
         else if( transform.position.z - aroundChunk >= Target.position.z )
         {
-            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z - 257);
+            transform.position = new Vector3(transform.position.x ,0 ,transform.position.z - 256);
             MapShape();
         }
 
@@ -67,7 +67,7 @@ public class MapCreation : MonoBehaviour
         for(float o = 1; o <= octave; o++)
         {
             
-            octaveHeight = height * (o / octave);
+            octaveHeight = height * (1 / o);
             octaveRefinement = refinement * o;
 
             for(int x = 0; x < size; x++)
