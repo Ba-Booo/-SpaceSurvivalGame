@@ -12,20 +12,18 @@ public class RandomOre : MonoBehaviour
     public float areaSize;  //범위
 
     
-    float playerX; 
+    float playerX;
     float playerZ;
     
     void Start()
     {
-        
-        playerX = transform.position.x;
-        playerZ = transform.position.z;
 
         for (int i = 0; i < count; i++)
         {
-            Instantiate(GameObject, new Vector3(Random.Range(playerX - areaSize, playerX + areaSize), 10, Random.Range(playerZ - areaSize, playerZ + areaSize)), Quaternion.identity );    //복제
+            playerX = Random.Range(transform.position.x - areaSize, transform.position.x+ areaSize);
+            playerZ = Random.Range(transform.position.z - areaSize, transform.position.z + areaSize);
+            Instantiate(GameObject, new Vector3(playerX, Terrain.activeTerrain.SampleHeight(new Vector3( playerX, 0, playerZ )), playerZ), Quaternion.identity );    //복제
         }
-
     }
 
     void Update()
