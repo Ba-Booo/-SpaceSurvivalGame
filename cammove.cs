@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cammove : MonoBehaviour
+public class CamMove : MonoBehaviour
 {
+
+    public Transform cameraPosition;
+
     public float sensX;
     public float sensY; //X와 Y의 대한 감도
 
@@ -21,6 +24,10 @@ public class cammove : MonoBehaviour
 
     private void Update()
     {
+
+        transform.position = cameraPosition.position;
+
+        
         //마우스값 input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
@@ -37,4 +44,6 @@ public class cammove : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0,yRotation, 0);
 
     }
+
+    
 }
