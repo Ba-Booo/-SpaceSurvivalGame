@@ -76,7 +76,7 @@ public class MapCreation : MonoBehaviour
                 for(int y = 0; y < size; y++)
                 { 
                     //1000은 대칭방지용
-                    terrainHeightData[y, x] = terrainHeightData[y, x] + (Mathf.PerlinNoise( (y + transform.position.z + 1000) * octaveRefinement, (x + transform.position.x + 1000) * octaveRefinement ) * octaveHeight);
+                    terrainHeightData[y, x] = terrainHeightData[y, x] + (Mathf.PerlinNoise( (y + transform.position.z) * octaveRefinement, (x + transform.position.x) * octaveRefinement ) * octaveHeight);
 
                 }
 
