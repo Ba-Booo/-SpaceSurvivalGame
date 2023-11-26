@@ -8,8 +8,7 @@ public class PlayerMove : MonoBehaviour
 
     Rigidbody rb;       //중력
     Slider os;      //산소
-    
-    public Transform AroundChunk;
+    public Transform cameraDirection;  //카메라 방향
 
     float MoveX, MoveZ;
 
@@ -19,9 +18,10 @@ public class PlayerMove : MonoBehaviour
     public float MaxOxygen;
 
 
+
     void Start()
     {
-
+        
         rb = GetComponent<Rigidbody>();
         os = GameObject.Find("OxygenSlider").GetComponent<Slider>();
         
@@ -33,7 +33,6 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         OxygenGauge();
-        Chunk();
     }
 
 
@@ -41,10 +40,14 @@ public class PlayerMove : MonoBehaviour
     void Move()
     {
 
-        MoveX = Input.GetAxis("Horizontal") * Speed * Time.deltaTime;   //좌우 움직임
-        MoveZ = Input.GetAxis("Vertical") * Speed * Time.deltaTime;   //앞뒤 움직임
+        MoveX = Input.GetAxis("Horizontal");   //좌우 움직임
+        MoveZ = Input.GetAxis("Vertical");   //앞뒤 움직임
 
-        transform.position = new Vector3(transform.position.x + MoveX, transform.position.y, transform.position.z + MoveZ );
+        Vector3 moveDir = (Vector3.forward * MoveZ) + (Vector3.right * MoveX);
+
+        transform.Translate( moveDir * Speed * Time.deltaTime, Space.Self );
+
+        transform.rotation = Quaternion.Euler( 0, cameraDirection.eulerAngles.y, 0 );
 
     }
 
@@ -76,11 +79,6 @@ public class PlayerMove : MonoBehaviour
             NowOxygen -= 1 * Time.deltaTime;
         }
 
-    }
-
-    void Chunk()
-    {
-        AroundChunk.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 
     void OnTriggerStay(Collider other)      //산소구역 충돌
