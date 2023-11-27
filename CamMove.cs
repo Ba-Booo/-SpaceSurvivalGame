@@ -11,7 +11,6 @@ public class CamMove : MonoBehaviour
     public float sensY; //X와 Y의 대한 감도
 
     public Transform orientation;
-    public Transform oon;
 
     float xRotation;
     float yRotation;
@@ -26,7 +25,7 @@ public class CamMove : MonoBehaviour
     private void Update()
     {    
 
-        transform.position = new Vector3( cameraPosition.position.x, cameraPosition.position.y + 1.6f, cameraPosition.position.z );
+        transform.position = new Vector3( cameraPosition.position.x, cameraPosition.position.y + 1.4f, cameraPosition.position.z );
 
 
         //마우스값 input
