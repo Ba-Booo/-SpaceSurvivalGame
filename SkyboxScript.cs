@@ -5,14 +5,11 @@ using UnityEngine;
 public class SkyboxScript : MonoBehaviour
 {
 
-    void Start()
-    {
-        
-    }
-
+    public float RotationSpeed;
 
     void Update()
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * 1f);
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * RotationSpeed);
     }
+    
 }
