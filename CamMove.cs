@@ -17,10 +17,11 @@ public class CamMove : MonoBehaviour
     void Update()
     {   
 
+        transform.position = new Vector3( cameraPosition.position.x, cameraPosition.position.y + 1.4f, cameraPosition.position.z );
+
         if(blind.blink != true)
         {
-            transform.position = new Vector3( cameraPosition.position.x, cameraPosition.position.y + 1.4f, cameraPosition.position.z );
-
+            
             //마우스값 input
             float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
